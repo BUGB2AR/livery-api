@@ -14,8 +14,8 @@ public class MeuPrimeiroController {
 
     public MeuPrimeiroController(AtivacaoClienteService ativacaoClienteService){
         this.ativacaoClienteService = ativacaoClienteService;
-        System.out.println("CHAMANDO A INJEÇÃO DE DEPENDENCIA do MeuPrimeiroController: " + ativacaoClienteService);
     }
+
     @GetMapping("/ola")
     public String helloWorld(){
         Cliente joabe = new Cliente("Joabe","joabe@gmail.com","343242424324");
