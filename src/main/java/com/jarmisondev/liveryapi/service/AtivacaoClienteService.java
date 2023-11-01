@@ -1,15 +1,14 @@
 package com.jarmisondev.liveryapi.service;
 
 import com.jarmisondev.liveryapi.modelo.Cliente;
+import com.jarmisondev.liveryapi.notificacao.Notificador;
 import com.jarmisondev.liveryapi.notificacao.NotificadorEmail;
-import org.springframework.stereotype.Component;
 
-@Component
 public class AtivacaoClienteService {
 
-    private NotificadorEmail notificador;
+    private Notificador notificador;
 
-    public AtivacaoClienteService(NotificadorEmail notificador){
+    public AtivacaoClienteService(Notificador notificador){
         this.notificador = notificador;
         System.out.println("AtivacaoClienteService: " + notificador);
     }
