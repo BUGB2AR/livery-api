@@ -4,23 +4,19 @@ import com.jarmisondev.liveryapi.modelo.Cliente;
 import com.jarmisondev.liveryapi.notificacao.Notificador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import java.util.List;
 
 @Component
 public class AtivacaoClienteService {
-
-    private Notificador notificador;
-
     @Autowired
-    public AtivacaoClienteService(Notificador notificador){
-        this.notificador = notificador;
-    }
+    private List<Notificador> notificadores;
+
 
     public void ativar(Cliente cliente){
         cliente.ativar();
 
-        this.notificador.notificar(cliente,"Seu cadastro foi ativo!");
+        for (Notificador notificador: notificadores){
+            notificador.notificar(cliente,"Seu cadastro foi ativo!");
+        }
     }
-
-
-
 }
