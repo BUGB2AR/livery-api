@@ -1,31 +1,34 @@
-package com.jarmisondev.liveryapi.jpa;
+package com.jarmisondev.liveryapi.infrastructure.repository;
 
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
+import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
-
 @Component
-public class CadastroCozinha {
+public class CozinhaRepositoryImpl implements CozinhaRepository {
     @PersistenceContext
     private EntityManager entityManager;
-
-    public List<Cozinha> listar(){
+    @Override
+    public List<Cozinha> todas(){
         return entityManager.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
+    @Override
     @Transactional
-    public Cozinha salvar(Cozinha cozinha){
+    public Cozinha adicionar(Cozinha cozinha){
         return entityManager.merge(cozinha);
     }
-
-    public Cozinha buscar(Long id){
+    @Override
+    public Cozinha porId(Long id){
         return entityManager.find(Cozinha.class,id);
     }
+    @Override
     @Transactional
     public void remover(Cozinha cozinha){
-        cozinha = buscar(cozinha.getId());
+        cozinha = porId(cozinha.getId());
         if (cozinha != null){
             entityManager.remove(cozinha);
         } else {

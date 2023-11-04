@@ -2,6 +2,7 @@ package com.jarmisondev.liveryapi.jpa;
 
 import com.jarmisondev.liveryapi.LiveryApiApplication;
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
+import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -11,12 +12,12 @@ public class AlteracaoCozinhaMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
+        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
 
         Cozinha cozinha = new Cozinha();
         cozinha.setId(1L);
         cozinha.setNome("Brasileira");
 
-        cadastroCozinha.salvar(cozinha);
+        cozinhaRepository.adicionar(cozinha);
     }
 }
