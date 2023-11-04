@@ -1,9 +1,11 @@
 package com.jarmisondev.liveryapi.notificacao;
 
 import com.jarmisondev.liveryapi.modelo.Cliente;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
+@Primary
 public class NotificadorEmail implements Notificador {
 
     @Override
