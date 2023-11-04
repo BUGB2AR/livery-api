@@ -3,19 +3,18 @@ package com.jarmisondev.liveryapi.notificacao;
 import com.jarmisondev.liveryapi.modelo.Cliente;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
-@Profile("prod")
+@Profile("dev")
 @Component
 @TipoDoNotificador(NivelUrgencia.URGENTE)
-public class NotificadorEmail implements Notificador {
+public class NotificadorEmailMock implements Notificador {
 
-    public NotificadorEmail(){
-        System.out.println("NOTIFICANDO PELO PROD");
+    public NotificadorEmailMock(){
+        System.out.println("NOTIFICANDO PELO MOCK");
     }
-
     @Override
     public void notificar(Cliente cliente, String mensagem){
 
-        System.out.printf("Notificando %s através do e-mail usando SMTP %s: %s\n",
+        System.out.printf("MOCK: Notificando %s através do e-mail usando SMTP %s: %s\n",
                 cliente.getNome(),cliente.getEmail(),mensagem);
     }
 
