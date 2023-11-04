@@ -2,6 +2,7 @@ package com.jarmisondev.liveryapi.jpa;
 
 import com.jarmisondev.liveryapi.LiveryApiApplication;
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
+import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
@@ -13,8 +14,8 @@ public class ConsultaCozinhaMain {
                 .web(WebApplicationType.NONE)
                 .run(args);
 
-        CadastroCozinha cadastroCozinha = applicationContext.getBean(CadastroCozinha.class);
-        List<Cozinha> cozinhas = cadastroCozinha.listar();
+        CozinhaRepository cozinhaRepository = applicationContext.getBean(CozinhaRepository.class);
+        List<Cozinha> cozinhas = cozinhaRepository.todas();
 
         for (Cozinha cozinha: cozinhas){
             System.out.println(cozinha.getNome());
