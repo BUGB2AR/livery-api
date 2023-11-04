@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Component
 public class CozinhaRepositoryImpl implements CozinhaRepository {
     @PersistenceContext
@@ -30,7 +31,7 @@ public class CozinhaRepositoryImpl implements CozinhaRepository {
         cozinha = porId(cozinha.getId());
         if (cozinha != null){
             entityManager.remove(cozinha);
-        } else {
+        }else{
             System.out.println("A cozinha ja foi excluida ou não existe");
         }
     }
