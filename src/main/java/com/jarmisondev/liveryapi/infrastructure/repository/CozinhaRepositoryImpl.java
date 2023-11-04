@@ -3,7 +3,6 @@ package com.jarmisondev.liveryapi.infrastructure.repository;
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
 import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import org.springframework.stereotype.Component;
-
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
