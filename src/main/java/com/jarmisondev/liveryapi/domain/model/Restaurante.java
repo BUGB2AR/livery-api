@@ -1,18 +1,16 @@
 package com.jarmisondev.liveryapi.domain.model;
 
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Getter
-@Setter
-@EqualsAndHashCode
+@Data
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Restaurante {
     @Id
+    @EqualsAndHashCode.Include
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nome;
