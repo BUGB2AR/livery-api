@@ -1,11 +1,10 @@
 package com.jarmisondev.liveryapi.notificacao;
 
 import com.jarmisondev.liveryapi.modelo.Cliente;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
-@Qualifier("email")
+@TipoDoNotificador(NivelUrgencia.URGENTE)
 public class NotificadorEmail implements Notificador {
 
     @Override
