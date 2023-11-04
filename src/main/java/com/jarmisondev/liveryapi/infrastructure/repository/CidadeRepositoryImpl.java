@@ -4,6 +4,7 @@ import com.jarmisondev.liveryapi.domain.model.Cidade;
 import com.jarmisondev.liveryapi.domain.repository.CidadeRepository;
 import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
@@ -16,6 +17,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
+    @Transactional
     public Cidade adicionar(Cidade cidade) {
         return entityManager.merge(cidade);
     }
@@ -26,6 +28,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     }
 
     @Override
+    @Transactional
     public void remover(Cidade cidade) {
         if (cidade.getId() != null){
             entityManager.remove(cidade);
