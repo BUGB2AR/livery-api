@@ -23,4 +23,13 @@ public class CadastroCozinha {
     public Cozinha buscar(Long id){
         return entityManager.find(Cozinha.class,id);
     }
+    @Transactional
+    public void remover(Cozinha cozinha){
+        cozinha = buscar(cozinha.getId());
+        if (cozinha != null){
+            entityManager.remove(cozinha);
+        } else {
+            System.out.println("A cozinha ja foi excluida ou não existe");
+        }
+    }
 }
