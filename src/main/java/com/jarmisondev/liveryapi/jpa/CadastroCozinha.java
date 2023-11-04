@@ -16,7 +16,7 @@ public class CadastroCozinha {
         return entityManager.createQuery("from Cozinha", Cozinha.class).getResultList();
     }
     @Transactional
-    public Cozinha adicionar(Cozinha cozinha){
+    public Cozinha salvar(Cozinha cozinha){
         return entityManager.merge(cozinha);
     }
 
