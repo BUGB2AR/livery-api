@@ -1,14 +1,15 @@
 package com.jarmisondev.liveryapi.service;
 
 import com.jarmisondev.liveryapi.modelo.Cliente;
+import com.jarmisondev.liveryapi.notificacao.NivelUrgencia;
 import com.jarmisondev.liveryapi.notificacao.Notificador;
+import com.jarmisondev.liveryapi.notificacao.TipoDoNotificador;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class AtivacaoClienteService {
-    @Qualifier("email")
+    @TipoDoNotificador(NivelUrgencia.URGENTE)
     @Autowired
     private Notificador notificador;
 
