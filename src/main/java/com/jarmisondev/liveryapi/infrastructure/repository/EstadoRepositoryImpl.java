@@ -2,11 +2,11 @@ package com.jarmisondev.liveryapi.infrastructure.repository;
 
 import com.jarmisondev.liveryapi.domain.model.Estado;
 import com.jarmisondev.liveryapi.domain.repository.EstadoRepository;
-import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
+import java.util.List;
+import org.springframework.stereotype.Component;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
-import java.util.List;
 
 @Component
 public class EstadoRepositoryImpl implements EstadoRepository {
