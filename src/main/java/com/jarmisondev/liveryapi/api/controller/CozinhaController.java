@@ -4,6 +4,7 @@ import com.jarmisondev.liveryapi.domain.model.Cozinha;
 import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,14 +55,17 @@ public class CozinhaController {
 
     @DeleteMapping("/{cozinhaId}")
     public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){
-        Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
+        try {
+            Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
 
-        if (cozinha != null){
-            cozinhaRepository.remover(cozinha);
-            return ResponseEntity.noContent().build();
+            if (cozinha != null){
+                cozinhaRepository.remover(cozinha);
+                return ResponseEntity.noContent().build();
+            }
+
+            return ResponseEntity.notFound().build();
+        } catch (DataIntegrityViolationException exception) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
-
-        return ResponseEntity.notFound().build();
     }
-
 }
