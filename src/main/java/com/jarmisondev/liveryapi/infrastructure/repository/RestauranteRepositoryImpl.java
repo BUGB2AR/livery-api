@@ -10,8 +10,10 @@ import java.util.List;
 
 @Component
 public class RestauranteRepositoryImpl implements RestauranteRepository {
+
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public List<Restaurante> todos() {
         return entityManager.createQuery("from Restaurante", Restaurante.class).getResultList();

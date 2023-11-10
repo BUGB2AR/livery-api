@@ -14,6 +14,7 @@ import java.util.List;
 public class EstadoRepositoryImpl implements EstadoRepository {
 
     private EntityManager entityManager;
+
     @Override
     public List<Estado> todos() {
         return entityManager.createQuery("from estado",Estado.class).getResultList();
