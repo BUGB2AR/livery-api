@@ -3,7 +3,6 @@ package com.jarmisondev.liveryapi.api.controller;
 import com.jarmisondev.liveryapi.domain.exception.EntidadeEmUsoException;
 import com.jarmisondev.liveryapi.domain.exception.EntidadeNaoEncontradaException;
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
-import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import com.jarmisondev.liveryapi.domain.service.CadastroCozinhaService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,19 +17,16 @@ import java.util.List;
 public class CozinhaController {
 
     @Autowired
-    private CozinhaRepository cozinhaRepository;
-
-    @Autowired
     private CadastroCozinhaService cadastroCozinha;
 
     @GetMapping
     public List<Cozinha> listar(){
-        return cozinhaRepository.todas();
+        return cadastroCozinha.todas();
     }
 
     @GetMapping("/{cozinhaId}")
     public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId){
-        Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
+        Cozinha cozinha = cadastroCozinha.buscarPor(cozinhaId);
 
         if (cozinha != null){
             return ResponseEntity.status(HttpStatus.OK).body(cozinha);
@@ -47,12 +43,12 @@ public class CozinhaController {
 
     @PutMapping("/{cozinhaId}")
     public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha){
-        Cozinha cozinhaAtual = cozinhaRepository.porId(cozinhaId);
+        Cozinha cozinhaAtual = cadastroCozinha.buscarPor(cozinhaId);
 
         if (cozinhaAtual != null){
             BeanUtils.copyProperties(cozinha, cozinhaAtual,"id");
+            cozinhaAtual = cadastroCozinha.salvar(cozinhaAtual);
 
-            cadastroCozinha.salvar(cozinhaAtual);
             return ResponseEntity.ok(cozinhaAtual);
         }
 
@@ -62,8 +58,8 @@ public class CozinhaController {
     @DeleteMapping("/{cozinhaId}")
     public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){
         try {
-            Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
-            cozinhaRepository.remover(cozinha);
+            Cozinha cozinha = cadastroCozinha.buscarPor(cozinhaId);
+            cadastroCozinha.excluir(cozinha);
 
             return ResponseEntity.noContent().build();
 
