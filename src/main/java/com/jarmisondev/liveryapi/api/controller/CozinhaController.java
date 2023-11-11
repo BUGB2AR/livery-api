@@ -1,5 +1,7 @@
 package com.jarmisondev.liveryapi.api.controller;
 
+import com.jarmisondev.liveryapi.domain.exception.EntidadeEmUsoException;
+import com.jarmisondev.liveryapi.domain.exception.EntidadeNaoEncontradaException;
 import com.jarmisondev.liveryapi.domain.model.Cozinha;
 import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import com.jarmisondev.liveryapi.domain.service.CadastroCozinhaService;
@@ -62,14 +64,14 @@ public class CozinhaController {
     public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){
         try {
             Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
+            cozinhaRepository.remover(cozinha);
 
-            if (cozinha != null){
-                cozinhaRepository.remover(cozinha);
-                return ResponseEntity.noContent().build();
-            }
+            return ResponseEntity.noContent().build();
 
+        } catch (EntidadeNaoEncontradaException exception) {
             return ResponseEntity.notFound().build();
-        } catch (DataIntegrityViolationException exception) {
+
+        } catch (EntidadeEmUsoException exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
     }
