@@ -4,16 +4,17 @@ import com.jarmisondev.liveryapi.domain.model.Cidade;
 import com.jarmisondev.liveryapi.domain.repository.CidadeRepository;
 import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
 
 @Component
 public class CidadeRepositoryImpl implements CidadeRepository {
-
+    @PersistenceContext
     private EntityManager entityManager;
     @Override
     public List<Cidade> todos() {
-        return entityManager.createQuery("from cidade",Cidade.class).getResultList();
+        return entityManager.createQuery("from Cidade",Cidade.class).getResultList();
     }
 
     @Override

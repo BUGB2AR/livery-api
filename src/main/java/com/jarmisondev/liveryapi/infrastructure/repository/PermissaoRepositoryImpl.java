@@ -7,13 +7,16 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import java.util.List;
+
 @Component
 public class PermissaoRepositoryImpl implements PermissaoRepository {
+
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public List<Permissao> todos() {
-        return entityManager.createQuery("from permissao",Permissao.class).getResultList();
+        return entityManager.createQuery("from Permissao",Permissao.class).getResultList();
     }
 
     @Override
