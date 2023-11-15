@@ -7,7 +7,6 @@ import com.jarmisondev.liveryapi.domain.model.Estado;
 import com.jarmisondev.liveryapi.domain.service.CadastroEstadoService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,12 +20,12 @@ public class EstadoController {
     private CadastroEstadoService cadastroEstado;
 
     @GetMapping
-    public List<Estado> listar(){
+    public List<Estado> listar() {
         return cadastroEstado.todas();
     }
 
     @GetMapping("/{estadoId}")
-    public ResponseEntity<Estado> buscarCidade(@PathVariable Long estadoId){
+    public ResponseEntity<Estado> buscarCidade(@PathVariable Long estadoId) {
         Estado estadoAtual = cadastroEstado.buscarPor(estadoId);
 
         if (estadoAtual != null){
@@ -38,7 +37,7 @@ public class EstadoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> adicionar(@RequestBody Estado estado){
+    public ResponseEntity<?> adicionar(@RequestBody Estado estado) {
         try {
             estado = cadastroEstado.salvar(estado);
 
@@ -52,7 +51,7 @@ public class EstadoController {
     }
 
     @PutMapping("/{estadoId}")
-    public ResponseEntity<?> atualizar(@RequestBody Estado estado, @PathVariable Long estadoId){
+    public ResponseEntity<?> atualizar(@RequestBody Estado estado, @PathVariable Long estadoId) {
         Estado estadoAtual = cadastroEstado.buscarPor(estadoId);
         try {
             if (estadoAtual != null){
@@ -71,7 +70,7 @@ public class EstadoController {
     }
 
     @DeleteMapping("/{estadoId}")
-    public ResponseEntity<?> remover(@PathVariable Long estadoId){
+    public ResponseEntity<?> remover(@PathVariable Long estadoId) {
         try {
             Estado estado = cadastroEstado.buscarPor(estadoId);
             cadastroEstado.excluir(estado);

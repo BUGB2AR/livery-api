@@ -20,12 +20,12 @@ public class CozinhaController {
     private CadastroCozinhaService cadastroCozinha;
 
     @GetMapping
-    public List<Cozinha> listar(){
+    public List<Cozinha> listar() {
         return cadastroCozinha.todas();
     }
 
     @GetMapping("/{cozinhaId}")
-    public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId){
+    public ResponseEntity<Cozinha> buscar(@PathVariable Long cozinhaId) {
         Cozinha cozinha = cadastroCozinha.buscarPor(cozinhaId);
 
         if (cozinha != null){
@@ -37,12 +37,12 @@ public class CozinhaController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Cozinha adicionar(@RequestBody Cozinha cozinha){
+    public Cozinha adicionar(@RequestBody Cozinha cozinha) {
        return cadastroCozinha.salvar(cozinha);
     }
 
     @PutMapping("/{cozinhaId}")
-    public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha){
+    public ResponseEntity<Cozinha> atualizar(@PathVariable Long cozinhaId, @RequestBody Cozinha cozinha) {
         Cozinha cozinhaAtual = cadastroCozinha.buscarPor(cozinhaId);
 
         if (cozinhaAtual != null){
@@ -56,7 +56,7 @@ public class CozinhaController {
     }
 
     @DeleteMapping("/{cozinhaId}")
-    public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId){
+    public ResponseEntity<Cozinha> remover(@PathVariable Long cozinhaId) {
         try {
             Cozinha cozinha = cadastroCozinha.buscarPor(cozinhaId);
             cadastroCozinha.excluir(cozinha);

@@ -20,7 +20,7 @@ public class FormaPagamentoRepositoryImpl implements FormaPagamentoRepository {
 
     @Override
     public void remover(FormaPagamento formaPagamento) {
-        if (formaPagamento.getId() != null){
+        if (formaPagamento.getId() != null) {
             entityManager.remove(formaPagamento);
         }else{
             System.out.println("Forma de pagamento não existe ou ja foi removida!!");

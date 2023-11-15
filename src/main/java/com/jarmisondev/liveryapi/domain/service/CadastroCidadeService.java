@@ -16,15 +16,15 @@ public class CadastroCidadeService {
     @Autowired
     private CidadeRepository cidadeRepository;
 
-    public List<Cidade>listar(){
+    public List<Cidade>listar() {
         return cidadeRepository.todos();
     }
 
-    public Cidade buscar(Long cidadeId){
+    public Cidade buscar(Long cidadeId) {
         return cidadeRepository.porId(cidadeId);
     }
 
-    public Cidade salvar(Cidade cidade){
+    public Cidade salvar(Cidade cidade) {
 
         Long cidadeEstadoId = cidade.getEstado().getId();
         Cidade cidades = cidadeRepository.porId(cidadeEstadoId);
@@ -38,7 +38,7 @@ public class CadastroCidadeService {
         return cidadeRepository.adicionar(cidade);
     }
 
-    public void remover(Cidade cidade){
+    public void remover(Cidade cidade) {
         try {
             cidadeRepository.remover(cidade);
         }catch(EmptyResultDataAccessException e){
