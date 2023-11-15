@@ -31,7 +31,7 @@ public class CidadeRepositoryImpl implements CidadeRepository {
     @Override
     @Transactional
     public void remover(Cidade cidade) {
-        if (cidade.getId() != null){
+        if (cidade.getId() != null) {
             entityManager.remove(cidade);
         }else{
             System.out.println("Cidade não existe ou foi removida!!!!");

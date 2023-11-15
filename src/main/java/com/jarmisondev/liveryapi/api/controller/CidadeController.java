@@ -1,12 +1,10 @@
 package com.jarmisondev.liveryapi.api.controller;
 
-import com.jarmisondev.liveryapi.domain.exception.EntidadeEmUsoException;
 import com.jarmisondev.liveryapi.domain.exception.EntidadeNaoEncontradaException;
 import com.jarmisondev.liveryapi.domain.model.Cidade;
 import com.jarmisondev.liveryapi.domain.service.CadastroCidadeService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,12 +18,12 @@ public class CidadeController {
     private CadastroCidadeService cadastroCidade;
 
     @GetMapping
-    public List<Cidade> listar(){
+    public List<Cidade> listar() {
         return cadastroCidade.listar();
     }
 
     @GetMapping("/{cidadeId}")
-    public ResponseEntity<Cidade> buscarCidade(@PathVariable Long cidadeId){
+    public ResponseEntity<Cidade> buscarCidade(@PathVariable Long cidadeId) {
         Cidade cidadeAtual = cadastroCidade.buscar(cidadeId);
 
         if (cidadeAtual != null){
@@ -37,7 +35,7 @@ public class CidadeController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<?> adicionar(@RequestBody Cidade cidade){
+    public ResponseEntity<?> adicionar(@RequestBody Cidade cidade) {
         try {
             cidade = cadastroCidade.salvar(cidade);
 
@@ -51,7 +49,7 @@ public class CidadeController {
     }
 
     @PutMapping("/{cidadeId}")
-    public ResponseEntity<?> atualizar(@RequestBody Cidade cidade, @PathVariable Long cidadeId){
+    public ResponseEntity<?> atualizar(@RequestBody Cidade cidade, @PathVariable Long cidadeId) {
         try {
             Cidade cidadeAtual = cadastroCidade.buscar(cidadeId);
 
@@ -71,7 +69,7 @@ public class CidadeController {
     }
 
     @DeleteMapping("/{cidadeId}")
-    public ResponseEntity<?> remover(@PathVariable Long cidadeId){
+    public ResponseEntity<?> remover(@PathVariable Long cidadeId) {
         try {
             Cidade cidade = cadastroCidade.buscar(cidadeId);
             cadastroCidade.remover(cidade);

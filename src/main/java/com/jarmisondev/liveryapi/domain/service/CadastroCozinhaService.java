@@ -16,19 +16,19 @@ public class CadastroCozinhaService {
     @Autowired
     private CozinhaRepository cozinhaRepository;
 
-    public List<Cozinha> todas(){
+    public List<Cozinha> todas() {
         return cozinhaRepository.todas();
     }
 
-    public Cozinha buscarPor(Long cozinhaId){
+    public Cozinha buscarPor(Long cozinhaId) {
         return cozinhaRepository.porId(cozinhaId);
     }
 
-    public Cozinha salvar(Cozinha cozinha){
+    public Cozinha salvar(Cozinha cozinha) {
         return cozinhaRepository.adicionar(cozinha);
     }
 
-    public void excluir(Cozinha cozinha){
+    public void excluir(Cozinha cozinha) {
         try {
             cozinhaRepository.remover(cozinha);
 

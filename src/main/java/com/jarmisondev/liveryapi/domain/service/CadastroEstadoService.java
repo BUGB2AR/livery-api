@@ -17,19 +17,19 @@ public class CadastroEstadoService {
     private EstadoRepository estadoRepository;
 
 
-    public List<Estado> todas(){
+    public List<Estado> todas() {
         return estadoRepository.todos();
     }
 
-    public Estado buscarPor(Long estadoId){
+    public Estado buscarPor(Long estadoId) {
         return estadoRepository.porId(estadoId);
     }
 
-    public Estado salvar(Estado estado){
+    public Estado salvar(Estado estado) {
         return estadoRepository.adicionar(estado);
     }
 
-    public void excluir(Estado estado){
+    public void excluir(Estado estado) {
         try {
             estadoRepository.remover(estado);
         }
