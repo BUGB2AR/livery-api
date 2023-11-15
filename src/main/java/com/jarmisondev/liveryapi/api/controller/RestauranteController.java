@@ -1,5 +1,6 @@
 package com.jarmisondev.liveryapi.api.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jarmisondev.liveryapi.domain.exception.EntidadeEmUsoException;
 import com.jarmisondev.liveryapi.domain.exception.EntidadeNaoEncontradaException;
 import com.jarmisondev.liveryapi.domain.model.Restaurante;
@@ -8,8 +9,13 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.ReflectionUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.lang.reflect.Field;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/restaurantes")
@@ -80,5 +86,32 @@ public class RestauranteController {
         } catch (EntidadeEmUsoException exception) {
             return ResponseEntity.status(HttpStatus.CONFLICT).build();
         }
+    }
+
+    @PatchMapping("/{restauranteId}")
+    public ResponseEntity<?> atualizarParcial(@PathVariable Long restauranteId, @RequestBody Map<String,Object> campos){
+        Restaurante restauranteAtual = cadastroRestaurante.buscarPor(restauranteId);
+
+        if (restauranteAtual == null){
+            return ResponseEntity.notFound().build();
+        }
+
+        merge(campos,restauranteAtual);
+
+        return atualizar(restauranteAtual, restauranteId);
+    }
+
+    private void merge(Map<String, Object> dadosOrigem, Restaurante restauranteDestino) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        Restaurante restauranteOrigem = objectMapper.convertValue(dadosOrigem, Restaurante.class);
+
+        dadosOrigem.forEach((nomePropriedade, valorPropriedade) ->{
+            Field field = ReflectionUtils.findField(Restaurante.class,nomePropriedade);
+            field.setAccessible(true);
+
+            Object valorPropriedadeField = ReflectionUtils.getField(field,restauranteOrigem);
+
+            ReflectionUtils.setField(field,restauranteDestino,valorPropriedadeField);
+        });
     }
 }
