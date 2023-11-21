@@ -12,6 +12,7 @@ import java.util.List;
 public class CidadeRepositoryImpl implements CidadeRepository {
     @PersistenceContext
     private EntityManager entityManager;
+
     @Override
     public List<Cidade> todos() {
         return entityManager.createQuery("from Cidade",Cidade.class).getResultList();

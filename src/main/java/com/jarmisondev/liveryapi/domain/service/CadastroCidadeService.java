@@ -2,8 +2,6 @@ package com.jarmisondev.liveryapi.domain.service;
 
 import com.jarmisondev.liveryapi.domain.exception.EntidadeNaoEncontradaException;
 import com.jarmisondev.liveryapi.domain.model.Cidade;
-import com.jarmisondev.liveryapi.domain.model.Cozinha;
-import com.jarmisondev.liveryapi.domain.model.Estado;
 import com.jarmisondev.liveryapi.domain.repository.CidadeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
