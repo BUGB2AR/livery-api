@@ -15,17 +15,18 @@ public class CadastroCidadeService {
     private CidadeRepository cidadeRepository;
 
     public List<Cidade>listar() {
-        return cidadeRepository.todos();
+        return cidadeRepository.findAll();
     }
 
     public Cidade buscar(Long cidadeId) {
-        return cidadeRepository.porId(cidadeId);
+        Cidade cidade = cidadeRepository.findById(cidadeId).get();
+        return cidade;
     }
 
     public Cidade salvar(Cidade cidade) {
 
         Long cidadeEstadoId = cidade.getEstado().getId();
-        Cidade cidades = cidadeRepository.porId(cidadeEstadoId);
+        Cidade cidades = cidadeRepository.findById(cidadeEstadoId).get();
 
         if (cidades == null){
             throw new EntidadeNaoEncontradaException(
@@ -33,12 +34,12 @@ public class CadastroCidadeService {
         }
 
         cidades.setEstado(cidades.getEstado());
-        return cidadeRepository.adicionar(cidade);
+        return cidadeRepository.save(cidade);
     }
 
     public void remover(Cidade cidade) {
         try {
-            cidadeRepository.remover(cidade);
+            cidadeRepository.delete(cidade);
         }catch(EmptyResultDataAccessException e){
             throw new EntidadeNaoEncontradaException("Não existe um cadastro de cidade atual.");
         }

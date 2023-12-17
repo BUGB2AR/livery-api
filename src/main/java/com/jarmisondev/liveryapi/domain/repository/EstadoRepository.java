@@ -1,12 +1,9 @@
 package com.jarmisondev.liveryapi.domain.repository;
 
 import com.jarmisondev.liveryapi.domain.model.Estado;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface EstadoRepository {
-    List<Estado> todos();
-    void remover(Estado estado);
-    Estado porId(Long id);
-    Estado adicionar(Estado estado);
+public interface EstadoRepository extends JpaRepository<Estado,Long> {
+
 
 }

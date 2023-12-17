@@ -22,16 +22,17 @@ public class CadastroRestauranteService {
     private CozinhaRepository cozinhaRepository;
 
     public List<Restaurante> todos() {
-        return restauranteRepository.todos();
+        return restauranteRepository.findAll();
     }
 
     public Restaurante buscarPor(Long restauranteId) {
-        return restauranteRepository.porId(restauranteId);
+        Restaurante restaurante = restauranteRepository.findById(restauranteId).get();
+        return restaurante;
     }
 
     public Restaurante salvar(Restaurante restaurante) {
         Long cozinhaId = restaurante.getCozinha().getId();
-        Cozinha cozinha = cozinhaRepository.porId(cozinhaId);
+        Cozinha cozinha = cozinhaRepository.findById(cozinhaId).get();
 
         if (cozinha == null) {
             throw new EntidadeNaoEncontradaException(
@@ -39,12 +40,12 @@ public class CadastroRestauranteService {
         }
 
         restaurante.setCozinha(cozinha);
-        return restauranteRepository.adicionar(restaurante);
+        return restauranteRepository.save(restaurante);
     }
 
     public void remover(Restaurante restaurante) {
         try {
-            restauranteRepository.remover(restaurante);
+            restauranteRepository.delete(restaurante);
 
         }catch(EmptyResultDataAccessException e) {
             throw new EntidadeNaoEncontradaException("Não existe um cadastro de restaurante atual.");

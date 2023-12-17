@@ -18,20 +18,21 @@ public class CadastroEstadoService {
 
 
     public List<Estado> todas() {
-        return estadoRepository.todos();
+        return estadoRepository.findAll();
     }
 
     public Estado buscarPor(Long estadoId) {
-        return estadoRepository.porId(estadoId);
+        Estado estado = estadoRepository.findById(estadoId).get();
+        return estado;
     }
 
     public Estado salvar(Estado estado) {
-        return estadoRepository.adicionar(estado);
+        return estadoRepository.save(estado);
     }
 
     public void excluir(Estado estado) {
         try {
-            estadoRepository.remover(estado);
+            estadoRepository.delete(estado);
         }
 
         catch(EmptyResultDataAccessException e){
