@@ -17,20 +17,21 @@ public class CadastroCozinhaService {
     private CozinhaRepository cozinhaRepository;
 
     public List<Cozinha> todas() {
-        return cozinhaRepository.todas();
+        return cozinhaRepository.findAll();
     }
 
     public Cozinha buscarPor(Long cozinhaId) {
-        return cozinhaRepository.porId(cozinhaId);
+        Cozinha cozinhaAtual = cozinhaRepository.findById(cozinhaId).get();
+        return cozinhaAtual;
     }
 
     public Cozinha salvar(Cozinha cozinha) {
-        return cozinhaRepository.adicionar(cozinha);
+        return cozinhaRepository.save(cozinha);
     }
 
     public void excluir(Cozinha cozinha) {
         try {
-            cozinhaRepository.remover(cozinha);
+            cozinhaRepository.delete(cozinha);
 
         }catch(EmptyResultDataAccessException e){
             throw new EntidadeNaoEncontradaException("Não existe um cadastro de cozinha atual.");

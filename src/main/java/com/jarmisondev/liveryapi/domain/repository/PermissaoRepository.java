@@ -1,11 +1,8 @@
 package com.jarmisondev.liveryapi.domain.repository;
 
 import com.jarmisondev.liveryapi.domain.model.Permissao;
-import java.util.List;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PermissaoRepository {
-    List<Permissao> todos();
-    Permissao adicionar(Permissao permissao);
-    void remover(Permissao permissao);
-    Permissao porId(Long id);
+public interface PermissaoRepository extends JpaRepository<Permissao,Long> {
+
 }
