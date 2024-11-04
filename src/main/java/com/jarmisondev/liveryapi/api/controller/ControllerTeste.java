@@ -4,8 +4,6 @@ import com.jarmisondev.liveryapi.domain.model.Cozinha;
 import com.jarmisondev.liveryapi.domain.model.Restaurante;
 import com.jarmisondev.liveryapi.domain.repository.CozinhaRepository;
 import com.jarmisondev.liveryapi.domain.repository.RestauranteRepository;
-import static com.jarmisondev.liveryapi.infrastructure.repository.spec.RestaurantesSpecs.comFreteGratis;
-import static com.jarmisondev.liveryapi.infrastructure.repository.spec.RestaurantesSpecs.comNomeSemelhante;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -44,7 +42,12 @@ public class ControllerTeste {
     public int countByCozinhaId(Long cozinha) {
         return restauranteRepository.countByCozinhaId(cozinha);
     }
-
+    
+    @GetMapping("/cozinhas/buscar-primeiro")
+    public Optional<Cozinha> cozinhaPrimeiro(){
+    	return cozinhaRepository.buscarPrimeiro();
+    }
+    
     @GetMapping("/restaurantes/por-taxa-frete")
     public List<Restaurante> restaurantesPorTaxaFrete(BigDecimal taxaFreteInicial, BigDecimal taxaFreteFinal){
         return restauranteRepository.findByTaxaFreteBetween(taxaFreteInicial,taxaFreteFinal);
@@ -74,4 +77,12 @@ public class ControllerTeste {
     public List<Restaurante> restaurantesComFreteGratis(String nome) {
     	return restauranteRepository.findComFreteGratis(nome);
     }
+    
+    @GetMapping("/restaurantes/buscar-primeiro")
+    public Optional<Restaurante> buscarPrimeiro(){
+    	return restauranteRepository.buscarPrimeiro();
+    }
+    
+  
+    
 }
