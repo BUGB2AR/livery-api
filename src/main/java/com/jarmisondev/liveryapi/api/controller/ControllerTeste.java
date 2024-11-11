@@ -83,6 +83,4 @@ public class ControllerTeste {
     	return restauranteRepository.buscarPrimeiro();
     }
     
-  
-    
 }

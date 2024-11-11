@@ -3,6 +3,9 @@ package com.jarmisondev.liveryapi.domain.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -22,6 +25,7 @@ public class Restaurante {
 
     @ManyToOne
     @JoinColumn(name = "cozinha_id",nullable = false)
+    @JsonIgnore
     private Cozinha cozinha;
 
     @ManyToOne
